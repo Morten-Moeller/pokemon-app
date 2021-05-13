@@ -1,25 +1,36 @@
+import { useEffect, useState } from 'react'
 import './App.css'
-import Card from './components/Card/Card'
-import pokemons from './data.json'
 import logo from './image/logo.webp'
 
 export default function App() {
+  const [pokemonsRaw, setPokemonsRaw] = useState([])
+
+  let url = 'https://pokeapi.co/api/v2/pokemon?limit=10'
+  useEffect(() => {
+    fetch(url)
+      .then(res => res.json())
+      .then(data => setPokemonsRaw(data.results))
+  }, [url])
+
+  const [pokemons, setPokemons] = useState([])
+
+  useEffect(
+    () =>
+      pokemonsRaw.forEach(({ url }) => {
+        fetch(url)
+          .then(res => res.json())
+          .then(data => {
+            // setPokemons([...pokemons, data])
+            console.log(data)
+          })
+      }),
+    []
+  )
+
   return (
     <div className="App">
       <img src={logo} alt="" />
-      <div className="App__card-container">{renderCards()}</div>
-      <img src={logo} alt="" />
+      <div className="App__card-container"></div>
     </div>
   )
-}
-
-function renderCards() {
-  return pokemons.map(el => (
-    <Card
-      key={el.id}
-      name={el.name}
-      frontImage={el.images.front}
-      types={el.types}
-    />
-  ))
 }
