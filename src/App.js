@@ -1,9 +1,20 @@
 import './App.css'
 import Card from './components/Card/Card'
 import pokemons from './data.json'
+import logo from './image/logo.webp'
 
 export default function App() {
-  const renderCards = pokemons.map(el => (
+  return (
+    <div className="App">
+      <img src={logo} alt="" />
+      <div className="App__card-container">{renderCards()}</div>
+      <img src={logo} alt="" />
+    </div>
+  )
+}
+
+function renderCards() {
+  return pokemons.map(el => (
     <Card
       key={el.id}
       name={el.name}
@@ -11,6 +22,4 @@ export default function App() {
       types={el.types}
     />
   ))
-
-  return <div className="App">{renderCards}</div>
 }

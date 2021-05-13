@@ -1,7 +1,13 @@
 .App {
+  display: grid;
+  justify-items: center;
+  background: linear-gradient(45deg, lightcyan, rgb(201, 234, 252));
+  padding-top: 10px;
+}
+
+.App__card-container {
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
-  background-color: lightcyan;
 }
