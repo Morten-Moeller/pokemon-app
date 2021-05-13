@@ -20,8 +20,9 @@ export default function App() {
         fetch(url)
           .then(res => res.json())
           .then(data => {
-            // setPokemons([...pokemons, data])
+            setPokemons([...pokemons, data])
             console.log(data)
+            console.log(pokemons)
           })
       }),
     []
